@@ -1,8 +1,11 @@
-import * as dotenv from 'dotenv';
+
 import { TheServer } from "./server"
 import { validateEnv } from './utils/validateEnv';
+import dotenv from 'dotenv';
 
-dotenv.config({ path: '../prisma/.env' });
+const path = process.cwd() + '/prisma/.env';
+console.log(path);
+dotenv.config({ path: path });
 validateEnv();
 
 new TheServer().startServer();
