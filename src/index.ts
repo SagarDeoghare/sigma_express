@@ -1,4 +1,7 @@
-import { welcome } from "./new";
+import 'dotenv/config';
+import { TheServer } from "./server"
+import { validateEnv } from './utils/validateEnv';
+ 
+validateEnv();
 
-welcome();
-console.log("hello, world");
+new TheServer().startServer();
