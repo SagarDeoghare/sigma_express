@@ -1,0 +1,41 @@
+{
+  "name": "sigma_express",
+  "version": "1.0.0",
+  "description": "Useful to understand sigma and express with typescript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prodbuild": "webpack",
+    "build": "tsc",
+    "start:dev": "set PORT=5959 && webpack --watch --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SagarDeoghare/sigma_express.git"
+  },
+  "keywords": [
+    "sigma",
+    "typescript",
+    "express",
+    "webpack",
+    "webpack-cli",
+    "nodemon"
+  ],
+  "author": "Sagar P. Deoghare",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SagarDeoghare/sigma_express/issues"
+  },
+  "homepage": "https://github.com/SagarDeoghare/sigma_express#readme",
+  "devDependencies": {
+    "@tsconfig/node12": "^1.0.7",
+    "@types/node": "^14.11.2",
+    "nodemon-webpack-plugin": "^4.3.2",
+    "ts-loader": "^8.0.4",
+    "typescript": "^4.0.3",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-node-externals": "^2.5.2"
+  },
+  "dependencies": {}
+}
