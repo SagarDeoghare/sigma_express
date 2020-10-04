@@ -7,8 +7,51 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model user {
   id       Int    @id @default(autoincrement())
   name     String
   password String
+  email    String
+}
+
+model item {
+  id             Int         @id @default(autoincrement())
+  name           String
+  type           String?
+  purchase_price Float
+  selling_price  Float
+  purchase_qty   Int
+  sell_qty       Int
+  merchant_id    Int
+  purchase_date  DateTime
+  merchant       merchant    @relation(fields: [merchant_id], references: [id])
+  bill_item      bill_item[]
+}
+
+model bill_book {
+  id        Int         @id @default(autoincrement())
+  name      String      @default("abc")
+  phone     Int         @default(0)
+  bill_date DateTime
+  total     Float       @default(0)
+  bill_item bill_item[]
+}
+
+model merchant {
+  id   Int    @id @default(autoincrement())
+  name String
+  item item[]
+}
+
+model bill_item {
+  id        Int       @id @default(autoincrement())
+  item_id   Int
+  name      String
+  qty       Float
+  price     Float
+  total     Float     @default(0)
+  bill_id   Int
+  discount  Float?    @default(0)
+  bill_book bill_book @relation(fields: [bill_id], references: [id])
+  item      item      @relation(fields: [item_id], references: [id])
 }

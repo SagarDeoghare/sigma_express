@@ -3,7 +3,6 @@ import {
 } from 'envalid';
 
 export function validateEnv() {
-    console.log(process.env.PORT);
     cleanEnv(process.env, 
         {
             PORT: port(),
