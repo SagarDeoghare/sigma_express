@@ -1,2 +1,6 @@
 # sigma_express
-User full to learn sigma express basics
+Useful to learn sigma express basics
+
+## THINGS TO DO AFTER CHANGE IN DB
+npx prisma introspect
+npx prisma generate

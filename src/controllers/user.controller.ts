@@ -25,12 +25,12 @@ export class UserController implements IController{
   }
 
   public async createUser(req: Request, res: Response) {
-    logger.info("create enter..."+ this);
+    logger.info("create enter...");
     let user: IUser = req.body;
     if (user.name && user.password && user.email) {
       user = await UserModel.createUser(user);
     } else {
-      
+
     }
     res.send(user);
     logger.info("create exit...");

@@ -25,7 +25,6 @@ model item {
   merchant_id    Int
   purchase_date  DateTime
   merchant       merchant    @relation(fields: [merchant_id], references: [id])
-  bill_item      bill_item[]
 }
 
 model bill_book {
