@@ -30,7 +30,8 @@ export class UserController implements IController{
     if (user.name && user.password && user.email) {
       user = await UserModel.createUser(user);
     } else {
-
+      res.send("Unprocessable Entity");
+      res.status(422);
     }
     res.send(user);
     logger.info("create exit...");

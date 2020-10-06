@@ -2,10 +2,10 @@ import { Request, Response } from "express";
 import { logger } from "../config/winston";
 import * as express from 'express';
 import { IController } from './index';
-import { IItem, ItemModel } from '../models/item';
+import { IBillBook, BillBookModel } from '../models/billBook';
 
-export class ItemController implements IController{
-  private path: string = "/items";
+export class BillBookController implements IController{
+  private path: string = "/bill_book";
   private router: express.Router = express.Router();
 
   constructor() {
@@ -13,7 +13,7 @@ export class ItemController implements IController{
   }
 
   setRouter() {
-    this.router.post(this.path, this.createItem);
+    this.router.post(this.path, this.createBillBook);
   }
 
   getRouter() {
@@ -24,16 +24,16 @@ export class ItemController implements IController{
     this.setRouter();
   }
 
-  public async createItem(req: Request, res: Response) {
-    logger.info("create item...");
-    let item: IItem = req.body;
-    if (item.name && item.purchase_date && item.merchant_id) {
-      item = await ItemModel.createItem(item);
+  public async createBillBook(req: Request, res: Response) {
+    logger.info("create billbook...");
+    let item: IBillBook = req.body;
+    if (item.name && item.total ) {
+      item = await BillBookModel.createBillItem(item);
     } else {
       res.send("Unprocessable Entity");
       res.status(422);
     }
     res.send(item);
-    logger.info("create item exit...");
+    logger.info("create billbook exit...");
   }
 }

@@ -20,11 +20,12 @@ model item {
   type           String?
   purchase_price Float
   selling_price  Float
-  purchase_qty   Int
-  sell_qty       Int
+  purchase_qty   Float
+  sell_qty       Float
   merchant_id    Int
   purchase_date  DateTime
   merchant       merchant    @relation(fields: [merchant_id], references: [id])
+  bill_item      bill_item[]
 }
 
 model bill_book {
@@ -33,13 +34,16 @@ model bill_book {
   phone     Int         @default(0)
   bill_date DateTime
   total     Float       @default(0)
+  discount  Int?
   bill_item bill_item[]
 }
 
 model merchant {
-  id   Int    @id @default(autoincrement())
-  name String
-  item item[]
+  id       Int    @id @default(autoincrement())
+  name     String
+  mobile   Int    @unique
+  landline Int?
+  item     item[]
 }
 
 model bill_item {
