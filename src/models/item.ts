@@ -47,7 +47,7 @@ export class ItemModel extends Model {
     static async getItem(item: number): Promise<IItem | string> {
         let result: any;
         try {
-            const items = await Model.prisma.item.findOne( {
+            result = await Model.prisma.item.findOne( {
                 where: {
                     id: item
                 }

@@ -37,8 +37,7 @@ export class ItemController implements IController{
   }
 
   public async getItem(req: Request, res: Response) {
-    let item: number = req.body;
-    console.log(item);
+    let item: number = parseInt(req.params.id);
     if (item) {
       const data = await ItemModel.getItem(item);
       res.send(data);
