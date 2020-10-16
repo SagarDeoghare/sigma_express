@@ -14,6 +14,7 @@ export class ItemController implements IController{
 
   setRouter() {
     this.router.post(this.path, this.createItem);
+    this.router.get(this.path + '/:id', this.getItem)
   }
 
   getRouter() {
@@ -25,15 +26,25 @@ export class ItemController implements IController{
   }
 
   public async createItem(req: Request, res: Response) {
-    logger.info("create item...");
     let item: IItem = req.body;
-    if (item.name && item.purchase_date && item.merchant_id) {
-      item = await ItemModel.createItem(item);
+    if (item.name && item.purchase_date && item.merchant_id !== undefined) {
+      const data = await ItemModel.createItem(item);
+      res.send(data);
     } else {
       res.send("Unprocessable Entity");
       res.status(422);
     }
-    res.send(item);
-    logger.info("create item exit...");
+  }
+
+  public async getItem(req: Request, res: Response) {
+    let item: number = req.body;
+    console.log(item);
+    if (item) {
+      const data = await ItemModel.getItem(item);
+      res.send(data);
+    } else {
+      res.send("Unprocessable Entity");
+      res.status(422);
+    }
   }
 }

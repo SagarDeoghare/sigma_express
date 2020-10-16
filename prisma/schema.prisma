@@ -8,14 +8,16 @@ datasource db {
 }
 
 model user {
-  id       Int    @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
   name     String
   password String
   email    String
+  address  String?
+  mobile   Int
 }
 
 model item {
-  id             Int         @id @default(autoincrement())
+  id             Int      @id @default(autoincrement())
   name           String
   type           String?
   purchase_price Float
@@ -24,8 +26,9 @@ model item {
   sell_qty       Float
   merchant_id    Int
   purchase_date  DateTime
-  merchant       merchant    @relation(fields: [merchant_id], references: [id])
-  bill_item      bill_item[]
+  bill_id        String   @default("123ABCD")
+  item_size      String
+  merchant       merchant @relation(fields: [merchant_id], references: [id])
 }
 
 model bill_book {
@@ -39,16 +42,17 @@ model bill_book {
 }
 
 model merchant {
-  id       Int    @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
   name     String
-  mobile   Int    @unique
+  mobile   Int     @unique
   landline Int?
+  address  String?
   item     item[]
 }
 
 model bill_item {
   id        Int       @id @default(autoincrement())
-  item_id   Int
+  item_id   Int?
   name      String
   qty       Float
   price     Float
@@ -56,5 +60,21 @@ model bill_item {
   bill_id   Int
   discount  Float?    @default(0)
   bill_book bill_book @relation(fields: [bill_id], references: [id])
-  item      item      @relation(fields: [item_id], references: [id])
+}
+
+model merchant_account {
+  id                Int      @id @default(autoincrement())
+  paid_amount       Int
+  paid_amount_date  DateTime
+  goods_amount      Int
+  goods_amount_date DateTime
+}
+
+model daily_account {
+  id               Int       @id @default(autoincrement())
+  amount_in        Int?
+  amount_paid      Int?
+  comments         String?
+  amount_in_date   DateTime?
+  amount_paid_date DateTime?
 }

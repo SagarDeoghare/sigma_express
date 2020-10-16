@@ -3,7 +3,7 @@ import { logger } from '../config/winston';
 import { Model } from './model';
 
 export interface IBillItem {
-  item_id: number,
+  item_id: number | null,
   name: string,
   qty: number,
   price: number,
@@ -17,12 +17,7 @@ export class BillItemModel extends Model {
     static async createBillItem(item: IBillItem): Promise<IBillItem> {
         logger.info("Create item enter...");
         const newItem = await Model.prisma.bill_item.create({
-            data: { 
-               item: {
-                   connect: {
-                       id: item.item_id
-                   }
-               },
+            data: {
                bill_book: {
                    connect: {
                        id: item.bill_id

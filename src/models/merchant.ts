@@ -5,7 +5,8 @@ import { Model } from './model';
 export interface IMerchant {
     name: string,
     landline: number | null,
-    mobile: number
+    mobile: number,
+    address: string | null
 };
 
 export class MerchantModel extends Model {
